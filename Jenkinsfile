@@ -20,7 +20,7 @@ pipeline{
         withSonarQubeEnv('SonarQube') { 
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
-        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-project -Dsonar.host.url=http://43.204.149.139:9000 -Dsonar.login=sqp_8335ec08d6b978aebc0606449abc60c28e86c01b"
+        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-project -Dsonar.host.url=http://172.31.5.246:9000 -Dsonar.login=sqp_8335ec08d6b978aebc0606449abc60c28e86c01b"
     }
         }
         }
@@ -30,7 +30,7 @@ pipeline{
       nexusArtifactUploader(
       nexusVersion: 'nexus3',
       protocol: 'http',
-      nexusUrl: '65.1.111.70:8081',
+      nexusUrl: '172.31.13.194:8081',
       groupId: 'myGroupId',
       version: '1.0-SNAPSHOT',
       repository: 'maven-snapshots',
@@ -45,7 +45,7 @@ pipeline{
         }
         stage ('Deploy to Prod'){
      steps {
-        sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@3.110.115.199:/opt/apache-tomcat-8.0.52/webapps'
+        sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@172.31.4.184:/opt/apache-tomcat-8.0.52/webapps'
            }
    }
 }    
